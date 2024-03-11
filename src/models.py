@@ -77,23 +77,38 @@ class User(Base):
     Activo        = Column(String(1))
     
 
-class Favorites(Base):
-    __tablename__ = 'favorites'
-    id            = Column(Integer, primary_key=True)
-    character_id  = Column(Integer, ForeignKey('characters.id'))
-    vehicle_id   = Column(Integer, ForeignKey('vehicles.id'))
-    planet_id    = Column(Integer, ForeignKey('planets.id'))
-    user_id    = Column(Integer, ForeignKey('user.id'))
-    starships_id  = Column(Integer, ForeignKey('starships.id'))
-    user       = relationship(User)
-    character        = relationship(Characters)
-    vehicle          = relationship(Vehicles)
-    planet         = relationship(Planets)
-    star          = relationship(Starships)
+class FavoriteCharacter(Base):
+    __tablename__ = 'favorite_character'
+    id = Column(Integer, primary_key=True)
+    character_id = Column(Integer, ForeignKey('characters.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
+    character = relationship(Characters)
+    user = relationship(User)
 
+class FavoritePlanet(Base):
+    __tablename__ = 'favorite_planet'
+    id = Column(Integer, primary_key=True)
+    planet_id = Column(Integer, ForeignKey('planets.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
+    planet = relationship(Planets)
+    user = relationship(User)
 
+class FavoriteVehicle(Base):
+    __tablename__ = 'favorite_vehicle'
+    id = Column(Integer, primary_key=True)
+    vehicle_id = Column(Integer, ForeignKey('vehicles.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
+    vehicle = relationship(Vehicles)
+    user = relationship(User)
+
+class FavoriteStarship(Base):
+    __tablename__ = 'favorite_starship'
+    id = Column(Integer, primary_key=True)
+    starship_id = Column(Integer, ForeignKey('starships.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
+    starship = relationship(Starships)
+    user = relationship(User)
   
-
     def to_dict(self):
         return {}
     
